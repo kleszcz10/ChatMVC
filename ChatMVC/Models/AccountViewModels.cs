@@ -33,9 +33,14 @@ namespace ChatMVC.Models
         public string Id { get; set; }
         public DateTime SendTime { get; set; }
         public string MessageText { get; set; }
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+
+        [ForeignKey("SenderUser")]
+        public string SenderUserId { get; set; }
+        public ApplicationUser SenderUser { get; set; }
+
+        [ForeignKey("ReceiverUser")]
+        public string ReceiverUserId { get; set; }
+        public ApplicationUser ReceiverUser { get; set; }
     }
 
 

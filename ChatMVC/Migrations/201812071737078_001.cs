@@ -14,11 +14,14 @@ namespace ChatMVC.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         SendTime = c.DateTime(nullable: false),
                         MessageText = c.String(),
-                        UserId = c.String(maxLength: 128),
+                        SenderUserId = c.String(maxLength: 128),
+                        ReceiverUserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.AspNetUsers", t => t.ReceiverUserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.SenderUserId)
+                .Index(t => t.SenderUserId)
+                .Index(t => t.ReceiverUserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -93,7 +96,8 @@ namespace ChatMVC.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Messages", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "SenderUserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "ReceiverUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -103,7 +107,8 @@ namespace ChatMVC.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Messages", new[] { "UserId" });
+            DropIndex("dbo.Messages", new[] { "ReceiverUserId" });
+            DropIndex("dbo.Messages", new[] { "SenderUserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

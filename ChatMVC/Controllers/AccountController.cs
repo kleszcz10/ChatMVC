@@ -17,15 +17,29 @@ namespace ChatMVC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext context )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            Context = context;
+        }
+
+        public ApplicationDbContext Context
+        {
+            get
+            {
+                return _context ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            }
+            private set
+            {
+                _context = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
