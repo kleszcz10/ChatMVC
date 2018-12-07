@@ -6,6 +6,9 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.Action("UserList","Account")
+        </li>
         <li> 
             <a>@User.Identity.GetUserName()</a>
         </li>

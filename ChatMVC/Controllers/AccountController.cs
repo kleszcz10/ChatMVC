@@ -66,6 +66,12 @@ namespace ChatMVC.Controllers
             }
         }
 
+        public ActionResult UserList()
+        {
+            var users = Context.Users.ToList();
+            return PartialView("_UserList", users);
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
