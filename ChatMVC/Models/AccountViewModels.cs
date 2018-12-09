@@ -30,7 +30,9 @@ namespace ChatMVC.Models
 
     public class Message
     {
-        public string Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid ID { get; set; }
         public DateTime SendTime { get; set; }
         public string MessageText { get; set; }
 
@@ -41,6 +43,14 @@ namespace ChatMVC.Models
         [ForeignKey("ReceiverUser")]
         public string ReceiverUserId { get; set; }
         public ApplicationUser ReceiverUser { get; set; }
+        [NotMapped]
+        public TimeSpan TimeSinceSend
+        {
+            get
+            {
+                return DateTime.Now - SendTime;
+            }
+        }
     }
 
 

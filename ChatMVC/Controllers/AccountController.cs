@@ -66,6 +66,50 @@ namespace ChatMVC.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult RemoveMessage(Guid MessageId)
+        {
+           var message = Context.Messages.Find(MessageId);
+           var userId = message.ReceiverUserId;
+           if(message.SenderUserId == User.Identity.GetUserId())
+            {
+                Context.Messages.Remove(message);
+                Context.SaveChanges();
+            }
+            return RedirectToAction("MessageList", new { UserId = userId});
+        }
+
+        [HttpGet]
+        public ActionResult MessageList(string UserId)
+        {
+            var CurrentUserID = User.Identity.GetUserId();
+            var list = Context.Messages.Include("SenderUser").
+                Where(x => (x.ReceiverUserId == UserId && x.SenderUserId == CurrentUserID)
+                                                || (x.ReceiverUserId == CurrentUserID && x.SenderUserId == UserId))
+                                                .ToList();
+            ViewBag.ReciverID = UserId;
+            ViewBag.UserName = Context.Users.Find(UserId).Email;
+            return View(list);
+        }
+
+        [HttpGet]
+        public ActionResult SendMessage(string UserId)
+        {
+            ViewBag.ReciverID = UserId;
+            return PartialView("_SendMessage");
+        }
+
+        [HttpPost]
+        public ActionResult SendMessage(Message message)
+        {
+            message.SenderUserId = User.Identity.GetUserId();
+            message.SendTime = DateTime.Now;
+            Context.Messages.Add(message);
+            Context.SaveChanges();
+            ViewBag.ReciverID = message.ReceiverUserId;
+            return RedirectToAction("MessageList", new { UserId = message.ReceiverUserId });
+        }
+
         public ActionResult UserList()
         {
             var users = Context.Users.ToList();

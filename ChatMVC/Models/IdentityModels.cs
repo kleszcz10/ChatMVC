@@ -30,7 +30,7 @@ namespace ChatMVC.Models
             return new ApplicationDbContext();
         }
 
-        DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
     }
 }

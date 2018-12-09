@@ -13,7 +13,7 @@ namespace ChatMVC.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812071737078_001"; }
+            get { return "201812081059337_001"; }
         }
         
         string IMigrationMetadata.Source

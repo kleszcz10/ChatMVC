@@ -1,0 +1,44 @@
+﻿@model ChatMVC.Models.Message
+@using Microsoft.AspNet.Identity
+
+
+@if (Model.ReceiverUserId == User.Identity.GetUserId())
+{
+    <text><div class="message bg-light">
+    </text>
+}
+else
+{
+    <text><div class="message bg-dark">
+    </text>
+}
+@Html.DisplayFor(model => model.MessageText)
+<div class="removeButton">
+    <text>@Model.SendTime.ToString("HH:mm")</text>
+    @if (Model.TimeSinceSend.TotalMinutes <= 10)
+    {
+        <a class="btn-xs" data-toggle="modal" data-target="#RemoveMessage_@Html.DisplayFor(Model => Model.ID)" style="float: right">Usuń</a>
+    }
+</div>
+</div>
+
+
+
+<div class="modal fade" id="RemoveMessage_@Html.DisplayFor(Model => Model.ID)" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Czy chcesz usunąć tą wiadomość ?</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Model.SendTime</p>
+                <p>@Model.MessageText</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+                @Html.ActionLink("Usuń", "RemoveMessage", new { MessageId = Model.ID }, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</div>

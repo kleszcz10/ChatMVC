@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ChatMVC.Models.Message>
+
+<h2>Rozmowa z @ViewBag.UserName</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                @Html.Partial("_MessageView", item)
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    @Html.Action("SendMessage", new { UserId = ViewBag.ReciverID })
+</div>
+
+
+<script>
+    $(function () {
+        var removeButtons = $(".removeButton");
+        removeButtons.slideUp(0);
+        $(".message.bg-dark").on("click", function () {
+            removeButtons.not($(this).find(".removeButton")).slideUp();
+            $(this).find(".removeButton").slideToggle();
+        });
+    });
+
+</script>

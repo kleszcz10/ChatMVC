@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    box-sizing: border-box;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,21 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.message {
+    border: 0px;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+}
+.bg-dark {
+    background-color: #222222;
+    color: white;
+    float: right;
+}
+.bg-light {
+    color: black;
+    background-color: #d4d4d4;
+    float: left;
 }

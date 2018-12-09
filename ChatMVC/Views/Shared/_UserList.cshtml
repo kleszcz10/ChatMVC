@@ -5,7 +5,7 @@
         @foreach(var user in Model)
         {
             <li>
-                @Html.ActionLink(user.Email,"")
+                @Html.ActionLink(user.Email, "MessageList", "Account",new { UserId = user.Id},null)
             </li>
         }
     </ul>

@@ -11,13 +11,13 @@ namespace ChatMVC.Migrations
                 "dbo.Messages",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        ID = c.Guid(nullable: false, identity: true),
                         SendTime = c.DateTime(nullable: false),
                         MessageText = c.String(),
                         SenderUserId = c.String(maxLength: 128),
                         ReceiverUserId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.AspNetUsers", t => t.ReceiverUserId)
                 .ForeignKey("dbo.AspNetUsers", t => t.SenderUserId)
                 .Index(t => t.SenderUserId)

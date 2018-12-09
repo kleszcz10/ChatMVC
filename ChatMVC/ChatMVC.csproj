@@ -199,9 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812071737078_001.cs" />
-    <Compile Include="Migrations\201812071737078_001.Designer.cs">
-      <DependentUpon>201812071737078_001.cs</DependentUpon>
+    <Compile Include="Migrations\201812081059337_001.cs" />
+    <Compile Include="Migrations\201812081059337_001.Designer.cs">
+      <DependentUpon>201812081059337_001.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -263,6 +263,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_UserList.cshtml" />
+    <Content Include="Views\Account\_SendMessage.cshtml" />
+    <Content Include="Views\Account\MessageList.cshtml" />
+    <Content Include="Views\Account\_MessageView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,8 +284,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812071737078_001.resx">
-      <DependentUpon>201812071737078_001.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812081059337_001.resx">
+      <DependentUpon>201812081059337_001.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
